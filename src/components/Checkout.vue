@@ -1,11 +1,13 @@
 <template>
   <div>
+    <inventory />
     <hr />
     <div class="v-exercises">
       <div>
         <h1>My BɼokƏn Cart!</h1>
         <p>Items added to your Cart ({{cart.items.length}})</p>
         <hr />
+
         <p
           class="alert alert-warning"
           v-show="cart.items.length < 1"
@@ -27,26 +29,23 @@
               <td>{{item.color}}</td>
               <td>{{item.size}}</td>
               <td>
-                <input type="number" v-model="quantity" />
+                <input type="number" v-model="item.quantity" />
               </td>
-              <!--HElP out the view to make the price of this item display as currency by using a filter-->
-              <td>{{item.price * item.quantity}}</td>
+              <!-- TODO NEVER ALLOW NEGATIVE NUMBERS -->
+              <td>${{ item.price * item.quantity }}</td>
               <td>
-                <button class="btn btn-xs btn-warning" @click="removeItem(item)">&times;</button>
+                <button class="btn btn-xs btn-danger" @click="removeItem(item)">&times;</button>
               </td>
             </tr>
           </tbody>
           <tfoot>
             <tr>
               <td colspan="4" class="text-right">Total:</td>
-              <!--FIX THE COMPUTED TO SHOW THE ACTUAL TOTAL-->
-              <td colspan="2">{{cartTotal}}</td>
+              <td colspan="2">${{cartTotal}}</td>
             </tr>
           </tfoot>
         </table>
       </div>
-      <hr />
-      <inventory />
     </div>
   </div>
 </template>
@@ -57,15 +56,24 @@ export default {
   name: "Checkout",
   data() {
     return {
+      // TODO Move the cart item to the store
       cart: {
         items: [
           {
             itemId: "123",
-            name: "I DONT EXIST",
+            name: "A BɼokƏn ITEM",
             color: "red",
             size: "L",
             price: 10,
-            quantity: 1
+            quantity: -50
+          },
+          {
+            itemId: "1223",
+            name: "Another BɼokƏn ITEM",
+            color: "YOU SHOULD REALLY FIX THOSE BAD NUMBERS",
+            size: "L",
+            price: 16.74,
+            quantity: 5
           }
         ]
       }
@@ -76,17 +84,17 @@ export default {
       return this.$store.state.inventory;
     },
     cartTotal() {
+      // TODO FIX THE COMPUTED TO SHOW THE ACTUAL TOTAL
       return 0;
     }
   },
   methods: {
-    removeItem() {
+    removeItem(item) {
+      // TODO
       // Item gets passed in from our view when the user clicks the x button
       /*
        * This function should be able to remove the passed in item
-       * from our cart. You will have to first identify where the passed
-       * in item is in the array. Then you will need to use the correct
-       * Array.method to remove 1 item ... hint: method(i, 1)
+       * from our cart.
        */
     }
   },
@@ -97,5 +105,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

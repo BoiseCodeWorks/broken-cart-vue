@@ -5,12 +5,12 @@
     <p class="item-name">{{item.name}}</p>
     <img class="img-fluid" :src="item.img" />
     <div class>
-      <select class="form-control" v-model="item.selectedColor">
-        <option selected disabled>--Color--</option>
+      <select class="form-control" v-model="itemOptions.color">
+        <option selected disabled value>--Color--</option>
         <option v-for="color in item.colors" :key="color.name">{{color}}</option>
       </select>
-      <select class="form-control" v-model="item.selectedSize">
-        <option selected disabled>--Size--</option>
+      <select class="form-control" v-model="itemOptions.size">
+        <option selected disabled value>--Size--</option>
         <option v-for="size in item.sizes" :key="size">{{size}}</option>
       </select>
     </div>
@@ -27,6 +27,14 @@ export default {
   name: "Item",
   props: {
     item: { type: Object, required: true }
+  },
+  data() {
+    return {
+      itemOptions: {
+        color: "",
+        size: ""
+      }
+    };
   },
   methods: {
     addItemToCart(item) {

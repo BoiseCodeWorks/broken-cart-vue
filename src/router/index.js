@@ -7,6 +7,9 @@ function loadComponent(path) {
   return () => import("../views/" + path);
 }
 
+// TODO Why is the cart and the store on the same page??
+// It looks awful...you should do something about it 
+
 const routes = [
   {
     path: '/',

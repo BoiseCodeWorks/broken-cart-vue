@@ -33,6 +33,7 @@ export default new Vuex.Store({
     ]
   },
   mutations: {
+    // TODO you will need to add and remove items from your cart here
   },
   actions: {
   },
