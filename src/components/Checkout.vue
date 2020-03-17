@@ -57,29 +57,12 @@ export default {
   data() {
     return {
       // TODO Move the cart item to the store
-      cart: {
-        items: [
-          {
-            itemId: "123",
-            name: "A BɼokƏn ITEM",
-            color: "red",
-            size: "L",
-            price: 10,
-            quantity: -50
-          },
-          {
-            itemId: "1223",
-            name: "Another BɼokƏn ITEM",
-            color: "YOU SHOULD REALLY FIX THOSE BAD NUMBERS",
-            size: "L",
-            price: 16.74,
-            quantity: 5
-          }
-        ]
-      }
     };
   },
   computed: {
+    cart() {
+      return this.$store.state.cart;
+    },
     inventory() {
       return this.$store.state.inventory;
     },
