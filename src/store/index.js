@@ -65,6 +65,11 @@ export default new Vuex.Store({
     },
     updateStock(state, { inventoryItem, quantity }) {
       inventoryItem.stock -= quantity;
+    },
+    removeItem(state, item) {
+      let i = state.cart.items.findIndex(i => i.itemId == item.itemId);
+      if (i == -1) { return; }
+      state.cart.items.splice(i, 1);
     }
   },
   actions: {
@@ -81,6 +86,10 @@ export default new Vuex.Store({
       let inventoryItem = state.inventory.find(i => i.id == item.itemId);
       commit("updateStock", { inventoryItem, quantity: item.quantity });
 
+    },
+    async removeItem({ commit }, item) {
+      // TODO call the server to remove the item
+      commit("removeItem", item);
     }
   },
   modules: {

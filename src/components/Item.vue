@@ -1,7 +1,7 @@
 <template>
   <div class="shopping-item rounded" :class="{'out-of-stock': item.stock <= 0}">
     <!--TODO out the view to make the price of the item display as currency by using a filter-->
-    <p class="item-price">{{item.price}}</p>
+    <p class="item-price">{{item.price | currency}}</p>
     <p class="item-name">{{item.name}}</p>
     <img class="img-fluid" :src="item.img" />
     <div class>

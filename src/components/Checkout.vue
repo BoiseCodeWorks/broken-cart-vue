@@ -29,10 +29,10 @@
               <td>{{item.color}}</td>
               <td>{{item.size}}</td>
               <td>
-                <input type="number" v-model="item.quantity" />
+                <input type="number" v-model="item.quantity" min="1" />
               </td>
               <!-- TODO NEVER ALLOW NEGATIVE NUMBERS -->
-              <td>${{ item.price * item.quantity }}</td>
+              <td>{{ item.price * item.quantity | currency }}</td>
               <td>
                 <button class="btn btn-xs btn-danger" @click="removeItem(item)">&times;</button>
               </td>
@@ -41,7 +41,7 @@
           <tfoot>
             <tr>
               <td colspan="4" class="text-right">Total:</td>
-              <td colspan="2">${{cartTotal}}</td>
+              <td colspan="2">{{ cartTotal | currency }}</td>
             </tr>
           </tfoot>
         </table>
@@ -68,7 +68,14 @@ export default {
     },
     cartTotal() {
       // TODO FIX THE COMPUTED TO SHOW THE ACTUAL TOTAL
-      return 0;
+      let total = 0;
+      this.cart.items.forEach(item => (total += item.price * item.quantity));
+      return total;
+
+      // return this.cart.items.reduce(
+      //   (total, item) => (total += item.price * item.quantity),
+      //   0
+      // );
     }
   },
   methods: {
@@ -79,6 +86,7 @@ export default {
        * This function should be able to remove the passed in item
        * from our cart.
        */
+      this.$store.dispatch("removeItem", item);
     }
   },
   components: {
