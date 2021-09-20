@@ -5,7 +5,7 @@
       <p>What we have here is a broken website. There are a few challenges we need to solve to get it working.</p>
       <p>use the comments in the component file as guides. Following these clues, you should be able to get this cart back into top notch condition.</p>
 
-      <p>First things first, lets start with the cart component.</p>
+      <p>First things first, switch over to the cart page and then open the checkout component.</p>
     </div>
   </div>
 </template>

@@ -1,17 +1,29 @@
 <template>
   <div class="shopping-item rounded">
     <!--TODO out the view to make the price of the item display as currency by using a filter-->
-    <p class="item-price">{{ $filters.currencyUSD(item.price) }}</p>
-    <p class="item-name">{{item.name}}</p>
+    <p class="item-price">
+      {{ $filters.currencyUSD(item.price) }}
+    </p>
+    <p class="item-name">
+      {{ item.name }}
+    </p>
     <img class="img-fluid" :src="item.img" />
     <div class>
       <select class="form-control" v-model="itemOptions.color">
-        <option selected disabled value>--Color--</option>
-        <option v-for="color in item.colors" :key="color.name">{{color.name}}</option>
+        <option selected disabled value>
+          --Color--
+        </option>
+        <option v-for="color in item.colors" :key="color.name">
+          {{ color.name }}
+        </option>
       </select>
       <select class="form-control" v-model="itemOptions.size">
-        <option selected disabled value>--Size--</option>
-        <option v-for="size in item.sizes" :key="size">{{size}}</option>
+        <option selected disabled value>
+          --Size--
+        </option>
+        <option v-for="size in item.sizes" :key="size">
+          {{ size }}
+        </option>
       </select>
       <input
         class="form-control"
@@ -25,7 +37,9 @@
     <button
       class="btn btn-primary my-3"
       @click="addItemToCart(item)"
-    >Add</button>
+    >
+      Add
+    </button>
   </div>
 </template>
 
@@ -37,35 +51,19 @@ export default {
   setup() {
     return {
       itemOptions: {
-        color: "",
-        size: ""
+        color: '',
+        size: ''
       },
       addItemToCart(item) {
-        // TODO Implement this function
+        // FIXME Implement this function
         // item gets passed in to this function from the view
-        /*
-        * Our cart demands that items being added to it must have the following properties
-        * let newItem = {
-        *   itemId:     "",
-        *   name:       "",
-        *   color:      "",
-        *   size:       "",
-        *   price:      10,
-        *   quantity:    1,
-        * }
-        * console.log the item being passed in from the view
-        * to figure out which properties from the item need to be
-        * re-maped to the newItem object.
-        * After building the newItem, add it to the cart.
-        * If the item already exists in the cart only increase the quantity of the existing item
-        * DO NOT push the same item twice
-        */
+        // use the cartService to add the item
       }
-    };
+    }
   },
   methods: {
   }
-};
+}
 </script>
 
 <style lang="scss">

@@ -5,16 +5,16 @@
     <div class="v-exercises">
       <div>
         <h1>My BɼokƏn Cart!</h1>
-        <p>Items added to your Cart ({{ 0 }})</p>
+        <!-- FIXME show the actual number of items in the cart -->
+        <p>Total Items added to your Cart ({{ 0 }})</p>
         <hr />
 
-        <p
-          class="alert alert-warning"
-          v-show="cart.items.length < 1"
-        >
+        <!-- FIXME only show this message if there are no items in the cart -->
+        <p class="alert alert-warning">
           You have no items in your cart... Buy something!
         </p>
-        <table class="table" v-if="cart.items.length > 0">
+        <!-- FIXME only show this table if there are items in the cart -->
+        <table class="table">
           <thead>
             <tr>
               <th>Item</th>
@@ -31,11 +31,12 @@
               <td>{{ item.color }}</td>
               <td>{{ item.size }}</td>
               <td>
-                <input type="number" v-model="item.quantity" min="1" />
+                <!-- FIXME NEVER ALLOW NEGATIVE NUMBERS -->
+                <input type="number" v-model="item.quantity" />
               </td>
-              <!-- FIXME NEVER ALLOW NEGATIVE NUMBERS -->
               <td>{{ $filters.currencyUSD(item.price * item.quantity) }}</td>
               <td>
+                <!-- FIXME This button doesnt work -->
                 <button class="btn btn-xs btn-danger" @click="removeItem(item)">
                   &times;
                 </button>
@@ -64,17 +65,14 @@ import { AppState } from '../AppState.js'
 export default {
   setup() {
     return {
-      // TODO Move the cart item to the store
       cart: computed(() => AppState.cart),
       inventory: computed(() => AppState.inventory),
-      // TODO FIX THE COMPUTED TO SHOW THE ACTUAL TOTAL
+      // FIXME FIX THE COMPUTED TO SHOW THE ACTUAL TOTAL
       cartTotal: computed(() => 0),
       removeItem(item) {
-      // TODO
-      // Item gets passed in from our view when the user clicks the x button
-      /*
-       * This function should be able to remove the passed in item
-       * from our cart.
+      /* FIXME
+       * This function should use the cartService to remove
+       * the passed in item from the cart.
        */
       }
     }

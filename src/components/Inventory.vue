@@ -14,7 +14,7 @@ import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState.js'
 
 export default {
-  setup(){
+  setup() {
     return {
       inventory: computed(() => AppState.inventory)
     }
