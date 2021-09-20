@@ -1,0 +1,86 @@
+<template>
+  <div>
+    <inventory />
+    <hr />
+    <div class="v-exercises">
+      <div>
+        <h1>My BɼokƏn Cart!</h1>
+        <p>Items added to your Cart ({{ 0 }})</p>
+        <hr />
+
+        <p
+          class="alert alert-warning"
+          v-show="cart.items.length < 1"
+        >
+          You have no items in your cart... Buy something!
+        </p>
+        <table class="table" v-if="cart.items.length > 0">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Color</th>
+              <th>Size</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="item in cart.items" :key="item.itemId">
+              <td>{{ item.name }}</td>
+              <td>{{ item.color }}</td>
+              <td>{{ item.size }}</td>
+              <td>
+                <input type="number" v-model="item.quantity" min="1" />
+              </td>
+              <!-- FIXME NEVER ALLOW NEGATIVE NUMBERS -->
+              <td>{{ $filters.currencyUSD(item.price * item.quantity) }}</td>
+              <td>
+                <button class="btn btn-xs btn-danger" @click="removeItem(item)">
+                  &times;
+                </button>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="4" class="text-right">
+                Total:
+              </td>
+              <td colspan="2">
+                {{ $filters.currencyUSD(cartTotal) }}
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { computed } from '@vue/runtime-core'
+import { AppState } from '../AppState.js'
+export default {
+  setup() {
+    return {
+      // TODO Move the cart item to the store
+      cart: computed(() => AppState.cart),
+      inventory: computed(() => AppState.inventory),
+      // TODO FIX THE COMPUTED TO SHOW THE ACTUAL TOTAL
+      cartTotal: computed(() => 0),
+      removeItem(item) {
+      // TODO
+      // Item gets passed in from our view when the user clicks the x button
+      /*
+       * This function should be able to remove the passed in item
+       * from our cart.
+       */
+      }
+    }
+  }
+}
+</script>
+
+<style scoped>
+</style>
